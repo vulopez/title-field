@@ -310,14 +310,13 @@
         const stepApproved = document.getElementById("step-text-approved");
         const stepClosed = document.getElementById("step-text-closed");
         const stepFinished = document.getElementById("step-text-finished");
-        console.log(stepStudies);
 
         switch (stepStudies) {
           case "rad-state-1":
             coursesAproved.innerHTML = courses.value || "0";
             stepApproved.classList.remove("step-success");
             stepClosed.classList.remove("step-success");
-            stepFinished.classList.remove("step-active")    ;
+            stepFinished.classList.remove("step-active");
             stepFinished.classList.remove("step-success");
             break;
           case "rad-state-2":

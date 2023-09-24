@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Prototipo Título</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap-steps@%5E1.0/dist/bootstrap-steps.min.css" rel="stylesheet"> -->
+
+    <style>
+      .steps {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: flex;
+        overflow-x: auto;
+      }
+
+      .steps .step:first-child {
+        margin-left: auto;
+      }
+
+      .steps .step:last-child {
+        margin-right: auto;
+      }
+
+      .step:first-of-type .step-circle::before {
+        display: none;
+      }
+
+      .step:last-of-type .step-content {
+        padding-right: 0;
+      }
+
+      .step-content {
+        --step-length: 10rem;
+        box-sizing: content-box;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: var(--step-length);
+        /* min-width: 5rem;
+      max-width: 5rem; */
+        padding-top: 0.5rem;
+        padding-right: 1rem;
+      }
+
+      .step-circle {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 1.5rem;
+        height: 1.5rem;
+        color: #adb5bd;
+        border: 2px solid #adb5bd;
+        border-radius: 100%;
+        background-color: #fff;
+      }
+
+      .step-circle::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: -2px;
+        width: calc(var(--step-length) + 1rem - 1.5rem);
+        height: 2px;
+        transform: translate(-100%, -50%);
+        color: #adb5bd;
+        background-color: currentColor;
+      }
+
+      .step-text {
+        color: #adb5bd;
+        word-break: break-all;
+        margin-top: 0.25em;
+      }
+
+      .step-active .step-circle {
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+      }
+
+      .step-active .step-circle::before {
+        color: #007bff;
+      }
+
+      .step-active .step-text {
+        color: #007bff;
+      }
+
+      .step-error .step-circle {
+        color: #fff;
+        background-color: #dc3545;
+        border-color: #dc3545;
+      }
+
+      .step-error .step-circle::before {
+        color: #dc3545;
+      }
+
+      .step-error .step-text {
+        color: #dc3545;
+      }
+
+      .step-success .step-circle {
+        color: #28a745;
+        background-color: #28a745;
+        border-color: #28a745;
+      }
+
+      .step-success .step-circle::before {
+        color: #28a745;
+      }
+
+      .step-success .step-text {
+        color: #28a745;
+      }
+    </style>
+
+    <style>
+      .step-text {
+        text-align: center;
+        word-break: keep-all !important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <section>
+      <h1>Controles para ingresar Título Académico</h1>
+      <div class="d-flex title-form">
+        <div class="form-group w-25 p-2">
+          <label for="lst-studies">Nivel Académico:</label>
+          <select
+            class="form-select"
+            id="lst-studies"
+            name="lst-studies"
+            aria-label="Título Académico"
+            required
+          >
+            <option value="0" disabled selected>
+              Selecciona el nivel alcanzado...
+            </option>
+            <option value="1">Diversificado</option>
+            <option value="2">PEM</option>
+            <option value="3">Licenciatura</option>
+            <option value="4">Magister</option>
+            <option value="5">Postgrado</option>
+            <option value="6">Doctorado</option>
+          </select>
+          <div class="form-text" id="basic-addon4">
+            Último nivel cursado/cursando
+          </div>
+        </div>
+
+        <div class="form-group w-25 p-2" id="field-state" hidden>
+          <label for="form-select-state">Estado:</label>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="state-studies"
+              id="rad-state-1"
+              checked
+            />
+            <label class="form-check-label" for="rad-state-1">
+              Cursando...
+              <input
+                type="number"
+                class="form-control"
+                id="num_courses"
+                name="num_courses"
+                placeholder="Cursos Aprobados"
+              />
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="state-studies"
+              id="rad-state-2"
+            />
+            <label class="form-check-label" for="rad-state-2">
+              Pensum Cerrado
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="state-studies"
+              id="rad-state-3"
+            />
+            <label class="form-check-label" for="rad-state-3"> Graduado </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex title-form">
+        <div class="form-group w-25 p-2">
+          <label for="txt-career">Título:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="txt-career"
+            name="txt-career"
+            placeholder="Carrera estudiada"
+            required
+          />
+        </div>
+        <div class="form-group w-25 p-2">
+          <label for="txt-place">Institución:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="txt-place"
+            name="txt-place"
+            placeholder="Lugar donde estudió"
+            required
+          />
+        </div>
+      </div>
+    </section>
+
+    <hr />
+
+    <h1>Visualización de Título Académico</h1>
+
+    <section id="view-progress" hidden>
+      <ul class="steps">
+        <li id="step-text-studyng" class="step step-success">
+          <div class="step-content">
+            <span class="step-circle"></span>
+            <span class="step-text">Estudiando</span>
+          </div>
+        </li>
+        <li id="step-text-approved" class="step step-active">
+          <div class="step-content">
+            <span id="step-text-approved-text" class="step-circle">0</span>
+            <span class="step-text">Cursos Aprobados</span>
+          </div>
+        </li>
+        <li id="step-text-closed" class="step">
+          <div class="step-content">
+            <span class="step-circle"></span>
+            <span class="step-text">Pensum Cerrado</span>
+          </div>
+        </li>
+        <li id="step-text-finished" class="step">
+          <div class="step-content">
+            <span class="step-circle"></span>
+            <span class="step-text">Graduado</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section id="view-details">
+      <p>Nivel Académico: <span id="view-studies" class="fw-bold"></span></p>
+      <p>Título: <span id="view-title" class="fw-bold"></span></p>
+      <p>Institución: <span id="view-place" class="fw-bold"></span></p>
+    </section>
+
+    <script>
+      const lstStudies = document.getElementById("lst-studies"); // select Academic Level
+      const radStudyng = document.getElementById("rad-state-1"); // radio Studying
+      const state = document.getElementById("field-state"); // state of estudies
+
+      const title = document.getElementById("txt-career"); // title of studies
+      const place = document.getElementById("txt-place"); // place of studies
+
+      lstStudies.addEventListener("change", () => {
+        const selected = lstStudies.options[lstStudies.selectedIndex];
+
+        state.hidden = selected.value < 2;
+        document.getElementById("view-progress").hidden = selected.value < 2;
+        document.getElementById("view-studies").innerHTML = selected.text;
+      });
+
+      title.addEventListener("change", () => {
+        document.getElementById("view-title").innerHTML = title.value;
+      });
+
+      place.addEventListener("change", () => {
+        document.getElementById("view-place").innerHTML = place.value;
+      });
+
+      state.addEventListener("change", () => {
+        const stateCourses = document.querySelector(
+          'input[name="state-studies"]:checked'
+        );
+        const stepStudies = stateCourses.id;
+        const courses = document.getElementById("num_courses");
+        const coursesAproved = document.getElementById(
+          "step-text-approved-text"
+        );
+
+        const stepStudyng = document.getElementById("step-text-studyng");
+        const stepApproved = document.getElementById("step-text-approved");
+        const stepClosed = document.getElementById("step-text-closed");
+        const stepFinished = document.getElementById("step-text-finished");
+
+        switch (stepStudies) {
+          case "rad-state-1":
+            coursesAproved.innerHTML = courses.value || "0";
+            stepStudyng.classList.add("step-success");
+            break;
+          case "rad-state-2":
+            coursesAproved.innerHTML = "";
+            stepStudyng.classList.add("step-success");
+
+            break;
+          case "rad-state-3":
+            coursesAproved.innerHTML = "";
+
+            break;
+          default:
+            break;
+        }
+
+        courses.disabled = !radStudyng.checked;
+      });
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

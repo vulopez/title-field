@@ -237,7 +237,7 @@
 
     <h1>Visualización de Título Académico</h1>
 
-    <section id="view-progress" hidden>
+    <section id="view-progress">
       <ul class="steps">
         <li id="step-text-studyng" class="step step-success">
           <div class="step-content">
@@ -310,19 +310,29 @@
         const stepApproved = document.getElementById("step-text-approved");
         const stepClosed = document.getElementById("step-text-closed");
         const stepFinished = document.getElementById("step-text-finished");
+        console.log(stepStudies);
 
         switch (stepStudies) {
           case "rad-state-1":
             coursesAproved.innerHTML = courses.value || "0";
-            stepStudyng.classList.add("step-success");
+            stepApproved.classList.remove("step-success");
+            stepClosed.classList.remove("step-success");
+            stepFinished.classList.remove("step-active")    ;
+            stepFinished.classList.remove("step-success");
             break;
           case "rad-state-2":
             coursesAproved.innerHTML = "";
-            stepStudyng.classList.add("step-success");
+            stepApproved.classList.add("step-success");
+            stepClosed.classList.add("step-success");
+            stepFinished.classList.add("step-active");
+            stepFinished.classList.remove("step-success");
 
             break;
           case "rad-state-3":
             coursesAproved.innerHTML = "";
+            stepApproved.classList.add("step-success");
+            stepClosed.classList.add("step-success");
+            stepFinished.classList.add("step-success");
 
             break;
           default:
